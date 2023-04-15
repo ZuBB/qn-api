@@ -2,7 +2,7 @@ import { Options } from '@mikro-orm/core';
 import { TsMorphMetadataProvider } from '@mikro-orm/reflection';
 
 const config: Options = {
-  dbName: 'hatch-todos.db',
+  dbName: 'todos.db',
   type: 'sqlite',
 
   entitiesTs: ['./src/**/*.entity.*'],

@@ -1,7 +1,6 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
+import { CreateTodoDto, UpdateTodoDto, QueryParams } from './dto';
 import { TodosService } from './todos.service';
-import { CreateTodoDto } from './dto/create-todo.dto';
-import { UpdateTodoDto } from './dto/update-todo.dto';
 
 @Controller('todos')
 export class TodosController {
@@ -13,8 +12,18 @@ export class TodosController {
   }
 
   @Get()
-  findAll() {
-    return this.todosService.findAll();
+  findAll(@Query() queryParams: QueryParams) {
+    return this.todosService.findAll(queryParams);
+  }
+
+  @Get('latest-timestamp')
+  getTimestamp() {
+    return this.todosService.getLatestTimestamp();
+  }
+
+  @Get('clear')
+  removeAll() {
+    return this.todosService.removeAll();
   }
 
   @Get(':id')

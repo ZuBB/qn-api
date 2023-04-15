@@ -41,6 +41,7 @@ export class TodosService {
 
   async update(id: number, updateTodoDto: UpdateTodoDto): Promise<Todo> {
     const todo = await this.todosRepository.findOneOrFail(id);
+    // NOTE: a hack, transform pipe, did not work for some reason
     const completed = updateTodoDto.completed as unknown as string === 'true'
     wrap(todo).assign({ ...updateTodoDto, completed });
     await this.todosRepository.flush();

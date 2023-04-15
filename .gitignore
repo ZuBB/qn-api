@@ -35,5 +35,5 @@ lerna-debug.log*
 !.vscode/extensions.json
 
 hatch-todos.db
-
 temp
+public

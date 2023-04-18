@@ -15,7 +15,7 @@ const config: Options = {
   forceUtcTimezone: true,
   metadataProvider: TsMorphMetadataProvider,
 
-  debug: true,
+  debug: ['info'],
 };
 
 export default config;

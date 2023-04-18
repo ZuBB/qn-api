@@ -18,10 +18,10 @@ export class TodosController {
 
   @Get('latest-timestamp')
   getTimestamp() {
-    return this.todosService.getLatestTimestamp();
+    return this.todosService.getLatestModified();
   }
 
-  @Get('clear')
+  @Delete('wipe')
   removeAll() {
     return this.todosService.removeAll();
   }

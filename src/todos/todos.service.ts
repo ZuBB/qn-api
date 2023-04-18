@@ -13,6 +13,7 @@ type ListTodosResponse = {
 }
 
 const TODOS_SORT_ORDER = { orderBy: { createdAt: QueryOrder.DESC } };
+const COMPLETED_PAGINATION = { limit: 10, ...TODOS_SORT_ORDER };
 
 @Injectable()
 export class TodosService {
@@ -84,9 +85,8 @@ export class TodosService {
   }
 
   private findCompleted(todoFilterQuery: FilterQuery<Todo>): Promise<Todo[]> {
-    const pagination = { limit: 10, ...TODOS_SORT_ORDER };
     const incompletedFilterQuery = this.getTodoFilterQuery(todoFilterQuery, true);
-    return this.todosRepository.find(incompletedFilterQuery, pagination);
+    return this.todosRepository.find(incompletedFilterQuery, COMPLETED_PAGINATION);
   }
 
   private getTodoFilterQuery(todoFilterQuery: FilterQuery<Todo>, completed: boolean) {

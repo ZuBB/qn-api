@@ -1,4 +1,7 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, Patch, Post, Query } from '@nestjs/common';
+import {
+  Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post,
+  Query,
+} from '@nestjs/common';
 import { CreateTodoDto, UpdateTodoDto, QueryParams } from './dto';
 import { TodosService } from './todos.service';
 
@@ -22,7 +25,7 @@ export class TodosController {
   }
 
   @Delete('wipe')
-  @HttpCode(204)
+  @HttpCode(HttpStatus.NO_CONTENT)
   removeAll() {
     return this.todosService.removeAll();
   }
@@ -38,7 +41,7 @@ export class TodosController {
   }
 
   @Delete(':id')
-  @HttpCode(204)
+  @HttpCode(HttpStatus.NO_CONTENT)
   remove(@Param('id') id: string) {
     return this.todosService.remove(+id);
   }

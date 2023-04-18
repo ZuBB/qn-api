@@ -1,6 +1,8 @@
 import { BeforeCreate, Entity, EventArgs, Index, PrimaryKey, Property } from '@mikro-orm/core';
+import { HttpException, HttpStatus } from '@nestjs/common';
 
 const TODOS_LIMIT = 50;
+const TODOS_LIMIT_MESSAGE = 'Limit of todos is reached';
 
 @Entity({ tableName: 'todos' })
 export class Todo {
@@ -29,7 +31,7 @@ export class Todo {
     const currentCount = await args.em.count(Todo);
 
     return currentCount >= TODOS_LIMIT
-      ? Promise.reject('Limit of todos is reached')
+      ? Promise.reject(new HttpException(TODOS_LIMIT_MESSAGE, HttpStatus.TOO_MANY_REQUESTS))
       : Promise.resolve()
   }
 }

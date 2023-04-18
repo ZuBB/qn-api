@@ -1,4 +1,6 @@
-import { DateType, Entity, Index, PrimaryKey, Property, DateTimeType } from '@mikro-orm/core';
+import { BeforeCreate, Entity, EventArgs, Index, PrimaryKey, Property } from '@mikro-orm/core';
+
+const TODOS_LIMIT = 50;
 
 @Entity({ tableName: 'todos' })
 export class Todo {
@@ -20,5 +22,14 @@ export class Todo {
 
   constructor(todo: string) {
     this.todo = todo;
+  }
+
+  @BeforeCreate()
+  async beforeCreate(args: EventArgs<Todo>) {
+    const currentCount = await args.em.count(Todo);
+
+    return currentCount >= TODOS_LIMIT
+      ? Promise.reject('Limit of todos is reached')
+      : Promise.resolve()
   }
 }

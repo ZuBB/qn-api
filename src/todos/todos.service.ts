@@ -12,8 +12,8 @@ type ListTodosResponse = {
   latestTimestamp: string
 }
 
-const TODOS_SORT_ORDER = { orderBy: { todo: QueryOrder.ASC } };
-const COMPLETED_PAGINATION = { limit: 10, ...TODOS_SORT_ORDER };
+const INCOMPLETED_SORT_ORDER = { orderBy: { todo: QueryOrder.ASC } };
+const COMPLETED_SORT_ORDER = { orderBy: { completed: QueryOrder.DESC }, limit: 10 };
 
 @Injectable()
 export class TodosService {
@@ -81,12 +81,12 @@ export class TodosService {
 
   private findIncompleted(todoFilterQuery: FilterQuery<Todo>): Promise<Todo[]> {
     const completedFilterQuery = this.getTodoFilterQuery(todoFilterQuery, false);
-    return this.todosRepository.find(completedFilterQuery, TODOS_SORT_ORDER);
+    return this.todosRepository.find(completedFilterQuery, INCOMPLETED_SORT_ORDER);
   }
 
   private findCompleted(todoFilterQuery: FilterQuery<Todo>): Promise<Todo[]> {
     const incompletedFilterQuery = this.getTodoFilterQuery(todoFilterQuery, true);
-    return this.todosRepository.find(incompletedFilterQuery, COMPLETED_PAGINATION);
+    return this.todosRepository.find(incompletedFilterQuery, COMPLETED_SORT_ORDER);
   }
 
   private getTodoFilterQuery(todoFilterQuery: FilterQuery<Todo>, completed: boolean) {

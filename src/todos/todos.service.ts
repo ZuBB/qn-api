@@ -80,13 +80,13 @@ export class TodosService {
   }
 
   private findIncompleted(todoFilterQuery: FilterQuery<Todo>): Promise<Todo[]> {
-    const completedFilterQuery = this.getTodoFilterQuery(todoFilterQuery, false);
-    return this.todosRepository.find(completedFilterQuery, INCOMPLETED_SORT_ORDER);
+    const incompletedFilterQuery = this.getTodoFilterQuery(todoFilterQuery, false);
+    return this.todosRepository.find(incompletedFilterQuery, INCOMPLETED_SORT_ORDER);
   }
 
   private findCompleted(todoFilterQuery: FilterQuery<Todo>): Promise<Todo[]> {
-    const incompletedFilterQuery = this.getTodoFilterQuery(todoFilterQuery, true);
-    return this.todosRepository.find(incompletedFilterQuery, COMPLETED_SORT_ORDER);
+    const completedFilterQuery = this.getTodoFilterQuery(todoFilterQuery, true);
+    return this.todosRepository.find(completedFilterQuery, COMPLETED_SORT_ORDER);
   }
 
   private getTodoFilterQuery(todoFilterQuery: FilterQuery<Todo>, completed: boolean) {

@@ -12,7 +12,7 @@ type ListTodosResponse = {
   latestTimestamp: string
 }
 
-const TODOS_SORT_ORDER = { orderBy: { createdAt: QueryOrder.DESC } };
+const TODOS_SORT_ORDER = { orderBy: { todo: QueryOrder.ASC } };
 const COMPLETED_PAGINATION = { limit: 10, ...TODOS_SORT_ORDER };
 
 @Injectable()

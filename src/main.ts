@@ -6,7 +6,6 @@ async function bootstrap() {
 
   app.setGlobalPrefix('api');
 
-  // TODO: take port from env vars
   await app.listen(8000);
 }
 bootstrap();

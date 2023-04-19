@@ -13,7 +13,7 @@ type ListTodosResponse = {
 }
 
 const INCOMPLETED_SORT_ORDER = { orderBy: { todo: QueryOrder.ASC } };
-const COMPLETED_SORT_ORDER = { orderBy: { completed: QueryOrder.DESC }, limit: 10 };
+const COMPLETED_SORT_ORDER = { orderBy: { updatedAt: QueryOrder.DESC }, limit: 10 };
 
 @Injectable()
 export class TodosService {
